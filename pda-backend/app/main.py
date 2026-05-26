@@ -21,14 +21,12 @@ pwd_context = CryptContext(schemes=["pbkdf2_sha256"], deprecated="auto")
 
 app = FastAPI()
 
-frontend_url = os.getenv("FRONTEND_URL", "https://pda-project-zeta.vercel.app")
-
 app.add_middleware(
     CORSMiddleware,
     allow_origins=[
         "http://localhost:3000",
         "http://127.0.0.1:3000",
-        frontend_url,
+        "https://pda-project-zeta.vercel.app",
     ],
     allow_credentials=True,
     allow_methods=["*"],
