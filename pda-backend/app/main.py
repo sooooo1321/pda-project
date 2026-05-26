@@ -1,3 +1,5 @@
+import os
+
 from fastapi import FastAPI, Depends
 from sqlalchemy.orm import Session
 
@@ -19,9 +21,15 @@ pwd_context = CryptContext(schemes=["pbkdf2_sha256"], deprecated="auto")
 
 app = FastAPI()
 
+frontend_url = os.getenv("FRONTEND_URL", "http://localhost:3000")
+
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["http://localhost:3000"],
+    allow_origins=[
+        "http://localhost:3000",
+        "http://127.0.0.1:3000",
+        frontend_url,
+    ],
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
